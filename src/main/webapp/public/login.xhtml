@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Spring 5 Security + JSF 2.2 + PrimeFaces 7 Integration Example</title>
+</h:head>
+<h:body>
+	<h3>Spring 5 Security + JSF 2.2 + PrimeFaces 7 Integration Example</h3>
+	<font color="red"> 
+		<h:outputLabel value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />
+	</font>
+	
+	<form action="${request.contextPath}/login" method="post" >
+		<h:outputLabel value="Enter UserName:" />
+		<input type="text" name="email" />
+		<br />
+		<br />
+		<h:outputLabel value="Enter Password:" />
+		<input type="password" name="password" />
+		<br />
+		<br /> 
+		<input type="submit" value="Login" /> 
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	</form>
+	
+	<h1>Manual login</h1>
+	
+	<h:form id="loginForm" prependId="false">
+		
+		<p:inputText id="email" value="#{loginBean.email}" />
+		<p:password id="password" value="#{loginBean.password}" />
+		<p:commandButton id="login" action="#{loginBean.login()}" value="Login" />
+		
+	</h:form>
+
+<!-- 	<h:form  prependId="false"> -->
+
+<!-- 		<p:panelGrid columns="1" styleClass="ui-fluid center ui-noborder"> -->
+<!-- 			<h2>Please login</h2> -->
+
+<!-- 			<p:outputLabel value="Login failed!" styleClass="red" -->
+<!-- 				rendered="${!empty param['error']}" /> -->
+
+<!-- 			<p:inputText id="username" placeholder="Username" /> -->
+<!-- 			<p:password id="password" placeholder="Password" /> -->
+
+<!-- 			<p:commandButton value="Login" ajax="false" /> -->
+<!-- 		</p:panelGrid> -->
+
+<!-- 	</h:form> -->
+		
+</h:body>
+</html>
