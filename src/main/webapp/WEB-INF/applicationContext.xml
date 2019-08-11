@@ -101,8 +101,12 @@
 		</sec:authentication-provider>
 	</sec:authentication-manager>
 	
-	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-		<constructor-arg value="4" />
+<!-- 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"> -->
+<!-- 		<constructor-arg value="4" /> -->
+<!-- 	</bean> -->
+
+	<bean id="passwordEncoder" class="com.jsf.util.CustomUserPasswordEncoder">
+		
 	</bean>
 	
 	<sec:http auto-config="true">

@@ -71,13 +71,13 @@ public class UserBean extends BaseBean implements Serializable {
 		}
 		
 		
-		Set<Authority> authorities = new HashSet<Authority>();
-		Authority authority = null;
-
-		authority = getFacade().findAuthorityById(new Integer(2));
-		authorities.add(authority);
-		
-		user.setAuths(authorities);
+//		Set<Authority> authorities = new HashSet<Authority>();
+//		Authority authority = null;
+//
+//		authority = getFacade().findAuthorityById(new Integer(2));
+//		authorities.add(authority);
+//		
+//		user.setAuths(authorities);
 		
 		getFacade().saveUser(user);
 		user = new User();
