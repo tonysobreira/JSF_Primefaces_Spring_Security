@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 public class CryptoUtil {
 
 	public static String IV = "AAAAAAAAAAAAAAAA";
-	public static String chaveEncriptacao = "123456789";
+	public static String chaveEncriptacao = "0123456789abcdef";
 
 	public static String encryptAES(String textopuro) {
 

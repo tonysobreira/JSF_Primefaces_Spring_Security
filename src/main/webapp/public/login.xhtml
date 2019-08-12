@@ -30,6 +30,8 @@
 	
 	<h:form id="loginForm" prependId="false">
 		
+		<p:outputLabel value="Login failed!" styleClass="red" rendered="${!empty param['error']}" />
+
 		<p:inputText id="email" value="#{loginBean.email}" />
 		<p:password id="password" value="#{loginBean.password}" />
 		<p:commandButton id="login" action="#{loginBean.login()}" value="Login" />
@@ -39,22 +41,6 @@
 	<h1>Register</h1>
 	
 	<p:link value="Register" outcome="/public/register.xhtml" />
-
-<!-- 	<h:form  prependId="false"> -->
-
-<!-- 		<p:panelGrid columns="1" styleClass="ui-fluid center ui-noborder"> -->
-<!-- 			<h2>Please login</h2> -->
-
-<!-- 			<p:outputLabel value="Login failed!" styleClass="red" -->
-<!-- 				rendered="${!empty param['error']}" /> -->
-
-<!-- 			<p:inputText id="username" placeholder="Username" /> -->
-<!-- 			<p:password id="password" placeholder="Password" /> -->
-
-<!-- 			<p:commandButton value="Login" ajax="false" /> -->
-<!-- 		</p:panelGrid> -->
-
-<!-- 	</h:form> -->
 		
 </h:body>
 </html>

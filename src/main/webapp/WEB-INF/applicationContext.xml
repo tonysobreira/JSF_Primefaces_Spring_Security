@@ -86,11 +86,16 @@
 			always-use-default-target="true" 
 			username-parameter="email"
 			password-parameter="password"
-			/>
+			authentication-success-forward-url="/secure/user.xhtml"
+		/>
 		
 		<sec:csrf disabled="true"/>
 		<sec:logout logout-success-url="/"/>
 		<sec:access-denied-handler error-page="/public/accessdenied.xhtml"/>
+		
+<!-- 		<sec:intercept-url pattern="/css/**" access="isAnonymous()"/> -->
+<!-- 		<sec:intercept-url pattern="/js/**" access="isAnonymous()"/> -->
+<!-- 		<sec:intercept-url pattern="/**" access="isAuthenticated()"/> -->
 	</sec:http>
 	
 	<sec:authentication-manager alias="authenticationManager">

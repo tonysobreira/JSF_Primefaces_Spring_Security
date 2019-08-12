@@ -27,14 +27,22 @@ public class AuthorityDaoImpl  extends AbstractJpaRepository<Authority, Integer>
 
 	@Override
 	public Authority findAuthorityById(Integer id) {
-		//Authority a = (Authority) this.getEntityManager().createQuery("select a from Authority a where a.id = " + id).getSingleResult();
-		//return a;
 		return this.getById(Authority.class, id);
 	}
 
 	@Override
 	public Authority findByAuthority(String role) {
-		return this.findByAuthority(role);
+		StringBuilder jpql = new StringBuilder();
+		
+		jpql.append(" SELECT a FROM Authority a ");
+		jpql.append(" where a.authority = :authority ");
+		
+		Query query = this.getEntityManager().createQuery(jpql.toString());
+		
+		query.setParameter("authority", role);
+		
+		Authority a = (Authority) query.getSingleResult();
+		return a;
 	}
 
 }
