@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -64,6 +62,11 @@ public class Authority implements GrantedAuthority {
 	@Override
 	public int hashCode() {
 		return Objects.hash(authority);
+	}
+
+	@Override
+	public String toString() {
+		return "Authority [id=" + id + ", authority=" + authority + "]";
 	}
 
 }

@@ -13,9 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.jsf.util.CryptoUtil;
 
@@ -24,50 +21,33 @@ import com.jsf.util.CryptoUtil;
 public class LoginBean extends BaseBean implements Serializable {
 
 	private static final long serialVersionUID = 7413858190206623738L;
-	private String email;
-	private String password;
 	
+	private String email;
+	private String password1;
+	private String password2;
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
-	
-	//@Autowired
-	//private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+
 	public void login() {
-		
-		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		String encPass = encoder.encode(this.password);
-		
-		
-		String pass = "";
-				
-//		try {
-//			pass = CryptoUtil.encryptAES(this.password);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-//		try {
-//			String dec = CryptoUtil.decryptAES(pass);
-//			System.out.println(dec);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		
-		//pass = bCryptPasswordEncoder.encode(this.password);
-		//pass = this.password;
-		
-		//Authentication authRequest = new UsernamePasswordAuthenticationToken(this.email, pass);
-		Authentication authRequest = new UsernamePasswordAuthenticationToken(this.email, this.password);
+
+		String encPass = CryptoUtil.encryptAES(this.password1);
+		String decPass = CryptoUtil.decryptAES(encPass);
+
+		System.out.println("Encrypted Password: " + encPass);
+		System.out.println("Decrypted Password: " + decPass);
+
+		Authentication authRequest = new UsernamePasswordAuthenticationToken(this.email, this.password1);
 		Authentication authentication = authenticationManager.authenticate(authRequest);
 		SecurityContext securityContext = SecurityContextHolder.getContext();
-	    securityContext.setAuthentication(authentication);
-	    
-	    try {
+		securityContext.setAuthentication(authentication);
+
+		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("/JSF_Primefaces_Spring/secure/user.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	public String getEmail() {
@@ -78,12 +58,20 @@ public class LoginBean extends BaseBean implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPassword1() {
+		return password1;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword1(String password1) {
+		this.password1 = password1;
 	}
-	
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
+
 }

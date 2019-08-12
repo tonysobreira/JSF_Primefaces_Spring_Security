@@ -7,13 +7,11 @@ import com.jsf.model.User;
 
 public interface Facade {
 
-	public void saveUser(User user);
+	public User saveUser(User user);
 
 	public List<User> listUser();
 
 	public void deleteUser(User user);
-	
-	public List<User> getUserListTest();
 	
 	public Authority save(Authority authority);
 
@@ -22,5 +20,7 @@ public interface Facade {
 	public Authority findAuthorityById(Integer id);
 
 	public Authority findByAuthority(String role);
+	
+	public User updateUser(User user);
 
 }

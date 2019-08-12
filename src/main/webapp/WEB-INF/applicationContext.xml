@@ -37,28 +37,15 @@
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
-	<context:component-scan base-package="com.jsf;" />
-	
 	<context:annotation-config />
 	
-	<tx:annotation-driven/>
-
-	<!-- If you prefer XML based Dependency Injection remove annotation from 
-		class and uncomment below configuration -->
-		
-	<!-- <bean class="com.jsf.dao.CarImpl" id="carDAO" /> 
-		<bean class="com.jsf.bean.CarBean" id="carBean"> 
-		<property name="carDao" ref="carDAO"></property> </bean> -->
-		
-	<!-- Configuração do banco de dados-->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<context:component-scan base-package="com.jsf;" />
 	
-<!-- 		<property name="driverClass" value="org.h2.Driver" /> -->
-<!-- 		<property name="jdbcUrl" value="jdbc:h2:mem:testdb"/> -->
-<!-- 		<property name="user" value="sa" /> -->
-<!-- 		<property name="password" value="" /> -->
-
+	<tx:annotation-driven/>
+		
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="org.postgresql.Driver" />
+		
 		<property name="jdbcUrl" value="jdbc:postgresql://ec2-174-129-27-158.compute-1.amazonaws.com:5432/d7101iq738p7n0?useSSL=true"/>
 		<property name="user" value="udwnkrhpdbwzpo" />
 		<property name="password" value="db10b14d0ab50db3a9130dee36e72a809cfaeb02b046f1a14e925894ea3b0f32" />
@@ -71,42 +58,19 @@
 	    <property name="loginTimeout" value="300" />
 	</bean>
 	
-	<!-- Configuração do Hibernate -->
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="pu" />
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-<!-- 				<property name="databasePlatform" value="org.hibernate.dialect.H2Dialect" /> -->
 				<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
 	</bean>
 	
-	<!-- Configuração do gerente de transações do spring -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-	
-	<sec:authentication-manager alias="authenticationManager">
-		<sec:authentication-provider>
-			<sec:jdbc-user-service 
-				data-source-ref="dataSource"
-				users-by-username-query="select email, password, enabled from users where email = ?"
-				authorities-by-username-query="select u.email, a.authority from users u inner join user_authority ua on (u.user_id = ua.user_id) inner join authority a on (ua.authority_id = a.authority_id) where u.email = ?"
-			/>
-			<sec:password-encoder ref="passwordEncoder" />
-		</sec:authentication-provider>
-	</sec:authentication-manager>
-	
-<!-- 	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"> -->
-<!-- 		<constructor-arg value="4" /> -->
-<!-- 	</bean> -->
-
-	<bean id="passwordEncoder" class="com.jsf.util.CustomUserPasswordEncoder">
-		
 	</bean>
 	
 	<sec:http auto-config="true">
@@ -126,22 +90,29 @@
 		
 		<sec:csrf disabled="true"/>
 		<sec:logout logout-success-url="/"/>
+		<sec:access-denied-handler error-page="/public/accessdenied.xhtml"/>
 	</sec:http>
 	
-<!-- 	<sec:http auto-config="true"  > -->
-<!--         <sec:intercept-url pattern="/public/**" access="isAnonymous()" /> -->
-<!--         <sec:intercept-url pattern="/secure/**" access="isAuthenticated()"/> -->
-<!--         <sec:form-login username-parameter="app_username" password-parameter="app_password" login-page="/public/login.xhtml" login-processing-url="/appLogin" authentication-failure-url="/public/login.xhtml?error=true" /> -->
-<!--         <sec:csrf disabled="true" /> -->
-<!--         <sec:logout logout-success-url="/"  /> -->
-<!--     </sec:http> -->
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider>
+			<sec:jdbc-user-service 
+				data-source-ref="dataSource"
+				users-by-username-query="select email, password, enabled from users where email = ?"
+				authorities-by-username-query="select u.email, a.authority from users u inner join user_authority ua on (u.user_id = ua.user_id) inner join authority a on (ua.authority_id = a.authority_id) where u.email = ?"
+			/>
+			<sec:password-encoder ref="passwordEncoder" />
+		</sec:authentication-provider>
+	</sec:authentication-manager>
 
-<!--     <sec:authentication-manager alias="authenticationManager"> -->
-<!--         <sec:authentication-provider> -->
-<!--             <sec:user-service> -->
-<!--                 <sec:user name="admin" password="{noop}admin" authorities="ROLE_USER" /> -->
-<!--             </sec:user-service> -->
-<!--         </sec:authentication-provider> -->
-<!--     </sec:authentication-manager> -->
+	<!-- Encoder padrão do Spring Security -->
+	<!-- <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"> -->
+	<!-- <constructor-arg value="4" /> -->
+	<!-- </bean> -->
+
+	<bean id="passwordEncoder" class="com.jsf.util.CustomPasswordEncoder">
+		
+	</bean>
+	
+	
 
 </beans>

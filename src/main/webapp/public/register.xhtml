@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Register</title>
+</h:head>
+<h:body>
+
+	<h1>Register</h1>
+	
+	<h:form id="formUser">
+		<p:outputLabel value="Email" for="inputEmail" />
+		<p:inputText id="inputEmail" value="#{registerBean.email}" />
+		<br />
+		<p:outputLabel value="Password 1" for="inputPassword1" />
+		<p:password id="inputPassword1" value="#{registerBean.password1}" />
+		<br />
+		<p:outputLabel value="Password 2" for="inputPassword2" />
+		<p:password id="inputPassword2" value="#{registerBean.password2}" />
+		<br />
+		<p:commandButton value="Save" actionListener="#{registerBean.saveUser()}" process="@this @form" update="@all" />
+	</h:form>
+
+</h:body>
+</html>

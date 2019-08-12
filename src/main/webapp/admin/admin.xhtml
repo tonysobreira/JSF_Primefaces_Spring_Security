@@ -9,15 +9,20 @@
 	<title>Admin Page</title>
 </h:head>
 <h:body>
+
 	<h3>Admin Page</h3>
 	
 	<h:form onsubmit="this.action='#{request.contextPath}/logout';">
 		<p:commandButton value="Logout" ajax="false" />
 	</h:form>
 	
+	<br />
+	
 	<p:panel>
 		<h:outputText value="hello #{userBean.username}" />
 	</p:panel>
+	
+	<br />
 	
 	<h:form prependId="false">
 

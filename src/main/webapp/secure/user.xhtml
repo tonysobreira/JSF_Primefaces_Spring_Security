@@ -15,30 +15,23 @@
 
 	<h:form>
 		<p:outputLabel value="Welcome: #{userBean.getUsername()}" />
-		<br />
-		<p:commandButton value="Test" actionListener="#{userBean.test}" />
 	</h:form>
-	
-	<h:form>
-	<p:commandButton value="test2" onclick="PF('dialogTestWidget').show()"/>
-		<p:dialog id="dialogTest" widgetVar="dialogTestWidget">
-			<h:outputText value="Hello: #{userBean.username}" />
-		</p:dialog>
-	</h:form>
-	
-	<p:panel>
-		<sec:ifAnyGranted roles="ROLE_ADMIN">
-			ADMIN
-		</sec:ifAnyGranted>
-		<sec:ifAnyGranted roles="ROLE_USER">
-			USER
-		</sec:ifAnyGranted>
-		
-	</p:panel>
 	
 	<h:form onsubmit="this.action='#{request.contextPath}/logout';">
 		<p:commandButton value="Logout" ajax="false" />
 	</h:form>
+	
+	<br />
+	
+	<p:panel>
+		<sec:ifAnyGranted roles="ROLE_ADMIN">
+			<h:outputText value="YOU HAVE ADMIN ROLE" />
+		</sec:ifAnyGranted>
+		<br />
+		<sec:ifAnyGranted roles="ROLE_USER">
+			<h:outputText value="YOU HAVE USER ROLE" />
+		</sec:ifAnyGranted>
+	</p:panel>
 	
 	<br />
 	
@@ -86,6 +79,15 @@
 	    </f:facet>
 
 	</p:dataTable>
+	
+	<br />
+	
+	<h:form>
+		<p:commandButton value="test dialog" onclick="PF('dialogTestWidget').show()"/>
+		<p:dialog id="dialogTest" widgetVar="dialogTestWidget" modal="true">
+			<h:outputText value="Hello: #{userBean.username}" />
+		</p:dialog>
+	</h:form>
 
 </h:body>
 </html>
