@@ -46,9 +46,9 @@
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="org.postgresql.Driver" />
 		
-		<property name="jdbcUrl" value="jdbc:postgresql://ec2-174-129-27-158.compute-1.amazonaws.com:5432/d7101iq738p7n0?useSSL=true"/>
-		<property name="user" value="udwnkrhpdbwzpo" />
-		<property name="password" value="db10b14d0ab50db3a9130dee36e72a809cfaeb02b046f1a14e925894ea3b0f32" />
+		<property name="jdbcUrl" value="jdbc:postgresql://ec2-54-225-119-13.compute-1.amazonaws.com:5432/dfb9n8vo6f2099?useSSL=true"/>
+		<property name="user" value="pzisxgttyanlhy" />
+		<property name="password" value="f8149e3964f4f68f3b1253f0ce0f5379839744fbaac70bf01c7f5ec0797182c0" />
 		
 		<property name="minPoolSize" value="5" />
 	    <property name="maxPoolSize" value="30" />
