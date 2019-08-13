@@ -67,6 +67,13 @@
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
+		<property name="jpaProperties">
+			<props>
+			    <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+			    <!--                 <prop key="hibernate.hbm2ddl.auto">create</prop> -->
+                	    <prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+            	</property>
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
