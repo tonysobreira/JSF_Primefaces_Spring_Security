@@ -100,6 +100,10 @@
 		<sec:logout logout-success-url="/"/>
 		<sec:access-denied-handler error-page="/error/accessdenied.xhtml"/>
 		
+		<sec:headers>
+			<sec:frame-options disabled="true"/>
+		</sec:headers>
+		
 <!-- 		<sec:intercept-url pattern="/css/**" access="isAnonymous()"/> -->
 <!-- 		<sec:intercept-url pattern="/js/**" access="isAnonymous()"/> -->
 <!-- 		<sec:intercept-url pattern="/**" access="isAuthenticated()"/> -->
